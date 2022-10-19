@@ -48,8 +48,31 @@ int no_struct(char c, int count, va_list argu)
 			else
 				count += _putstring(s);
 			break;
+		case 'i':/* D */
+		case 'd':
+			j = va_arg(argu, int);
+			if (!j)
+			{
+				count++;
+				_putchar('0');
+			}
+			else
+				count += print_number(j);
+			break;
 		case '%':/* E */
 			count += _putchar('%');
+			break;
+		case 'b':/* F */
+			j = va_arg(argu, int);
+			count += dec_to_binary(j);
+			break;
+		case 'r': /* G */
+			s = va_arg(argu, char *);
+			count += rev_str(s);
+			break;
+		case 'R': /* H */
+			s = va_arg(argu, char *);
+			count += rot13(s);
 			break;
 		default:/* H */
 			count += 2;
@@ -91,23 +114,12 @@ int _printf(const char *format, ...)
 			count++;
 			_putchar(format[i]);
 		}
-		case 'i':/* D */
-		case 'd':
-			j = va_arg(argu, int);
-			if (!j)
-			{
-				count++;
-				_putchar('0');
-			}
-			else
-				count += print_number(j);
-			break;
 		else if (format[i + 1])/* E */
 		{
 			i++;
 			count = no_struct(format[i], count, argu);
 		}
-		else/* H */
+		else/* F */
 			return (-1);
 	}
 	va_end(argu);
