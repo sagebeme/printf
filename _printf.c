@@ -1,4 +1,4 @@
-#include "main.h"
+include "main.h"
 
 /**
 * no_struct - a helper function that is called when there is a %something
