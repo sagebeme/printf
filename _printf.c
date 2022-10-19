@@ -91,12 +91,23 @@ int _printf(const char *format, ...)
 			count++;
 			_putchar(format[i]);
 		}
+		case 'i':/* D */
+		case 'd':
+			j = va_arg(argu, int);
+			if (!j)
+			{
+				count++;
+				_putchar('0');
+			}
+			else
+				count += print_number(j);
+			break;
 		else if (format[i + 1])/* E */
 		{
 			i++;
 			count = no_struct(format[i], count, argu);
 		}
-		else/* F */
+		else/* H */
 			return (-1);
 	}
 	va_end(argu);
